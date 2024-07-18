@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { TButtonScheme, TButtonSize } from '../../style/theme';
 
-interface IProps {
+interface IProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children: React.ReactNode;
   size: TButtonSize;
   scheme: TButtonScheme;
@@ -11,13 +11,21 @@ interface IProps {
   isLoading?: boolean;
 }
 
-function Button({ children, size, scheme, disabled, isLoading }: IProps) {
+function Button({
+  children,
+  size,
+  scheme,
+  disabled,
+  isLoading,
+  ...props
+}: IProps) {
   return (
     <ButtonStyle
       size={size}
       scheme={scheme}
       disabled={disabled}
       isLoading={isLoading}
+      {...props}
     >
       {children}
     </ButtonStyle>

@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 import logo from '../../assets/logo.png';
@@ -6,7 +7,9 @@ function Footer() {
   return (
     <FooterStyle>
       <h1 className="logo">
-        <img src={logo} alt="Bookstore" />
+        <Link to="/">
+          <img src={logo} alt="Bookstore" />
+        </Link>
       </h1>
 
       <div className="copyright">
