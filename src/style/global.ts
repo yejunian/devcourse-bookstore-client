@@ -1,5 +1,6 @@
 import 'sanitize.css';
 import { createGlobalStyle } from 'styled-components';
+
 import { TThemeName } from './theme';
 
 interface IProps {

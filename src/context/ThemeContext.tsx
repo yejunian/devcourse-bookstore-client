@@ -1,7 +1,8 @@
 import { createContext, ReactNode, useEffect, useState } from 'react';
-import { getTheme, TThemeName } from '../style/theme';
-import { GlobalStyle } from '../style/global';
 import { ThemeProvider } from 'styled-components';
+
+import { GlobalStyle } from '../style/global';
+import { getTheme, TThemeName } from '../style/theme';
 
 interface State {
   themeName: TThemeName;

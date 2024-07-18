@@ -1,7 +1,8 @@
 import React from 'react';
+import styled from 'styled-components';
+
 import Footer from '../common/Footer';
 import Header from '../common/Header';
-import styled from 'styled-components';
 
 interface ILayoutProps {
   children: React.ReactNode;

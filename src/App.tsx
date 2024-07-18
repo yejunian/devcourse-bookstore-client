@@ -1,7 +1,7 @@
-import Layout from './components/layout/Layout';
-import Home from './pages/Home';
 import ThemeSwitcher from './components/header/ThemeSwitcher';
+import Layout from './components/layout/Layout';
 import { BookstoreThemeProvider } from './context/ThemeContext';
+import Home from './pages/Home';
 
 function App() {
   return (
