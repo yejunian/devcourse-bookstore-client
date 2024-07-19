@@ -1,14 +1,19 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
+import { getToken, removeToken } from '../store/authStore';
+
 const BASE_URL = 'http://localhost:3000';
 const DEFAULT_TIMEOUT = 30000;
 
 export const createClient = (config?: AxiosRequestConfig) => {
+  const token = getToken();
+
   const axiosInstance = axios.create({
     baseURL: BASE_URL,
     timeout: DEFAULT_TIMEOUT,
     headers: {
       'Content-Type': 'application/json',
+      Authorization: token ? `bearer ${token}` : '',
     },
     withCredentials: true,
     ...config,
@@ -19,6 +24,12 @@ export const createClient = (config?: AxiosRequestConfig) => {
       return response;
     },
     (error) => {
+      if (error.response.status === 401) {
+        removeToken();
+        window.location.href = '/login';
+        return;
+      }
+
       return Promise.reject(error);
     }
   );

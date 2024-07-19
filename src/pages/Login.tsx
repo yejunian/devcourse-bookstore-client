@@ -1,38 +1,47 @@
 import { useForm } from 'react-hook-form';
 import { Link, useNavigate } from 'react-router-dom';
-import styled from 'styled-components';
 
-import { signup } from '../api/auth.api';
+import { login, signup } from '../api/auth.api';
 import Button from '../components/common/Button';
 import InputText from '../components/common/InputText';
 import Title from '../components/common/Title';
 import { useAlert } from '../hooks/useAlert';
+import { useAuthStore } from '../store/authStore';
+import { SignupStyle } from './Signup';
 
-export interface ISignupProps {
+export interface ILoginProps {
   email: string;
   password: string;
 }
 
-function Signup() {
+function Login() {
   const navigate = useNavigate();
   const showAlert = useAlert();
+
+  const { isLoggedIn, storeLogin } = useAuthStore();
 
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<ISignupProps>();
+  } = useForm<ILoginProps>();
 
-  const onSubmit = async (data: ISignupProps) => {
-    await signup(data);
+  const onSubmit = async (data: ILoginProps) => {
+    try {
+      const response = await login(data);
 
-    showAlert('회원가입을 완료했습니다.');
-    navigate('/login');
+      storeLogin(response.token);
+
+      showAlert('로그인을 완료했습니다.');
+      navigate('/');
+    } catch (error) {
+      showAlert('로그인에 실패했습니다.');
+    }
   };
 
   return (
     <>
-      <Title size="large">회원가입</Title>
+      <Title size="large">로그인</Title>
 
       <SignupStyle>
         <form onSubmit={handleSubmit(onSubmit)}>
@@ -58,7 +67,7 @@ function Signup() {
 
           <fieldset>
             <Button type="submit" size="medium" scheme="primary">
-              회원가입
+              로그인
             </Button>
           </fieldset>
 
@@ -71,31 +80,4 @@ function Signup() {
   );
 }
 
-export const SignupStyle = styled.div`
-  max-width: ${({ theme }) => theme.layout.width.small};
-  margin: 80px auto;
-
-  fieldset {
-    border: 0;
-    padding: 0 0 8px 0;
-
-    .error-text {
-      color: red;
-    }
-  }
-
-  input {
-    width: 100%;
-  }
-
-  button {
-    width: 100%;
-  }
-
-  .info {
-    text-align: center;
-    padding: 16px 0 0 0;
-  }
-`;
-
-export default Signup;
+export default Login;
