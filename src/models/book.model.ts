@@ -1,4 +1,5 @@
-export interface Book {
+// TODO: 서버에서 id, pubDate 내려 주기
+export interface IBook {
   id: number;
   thumbnail: string;
   title: string;
@@ -9,8 +10,7 @@ export interface Book {
   excerpt: string;
 }
 
-// TODO: 서버에서 id, pubDate 내려 주기
-export interface BookDetail extends Book {
+export interface IBookDetail extends IBook {
   category: number;
   form: number;
   isbn: string;

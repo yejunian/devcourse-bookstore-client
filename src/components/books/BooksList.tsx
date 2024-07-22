@@ -3,12 +3,12 @@ import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { QUERYSTRING } from '../../constants/querystring';
-import { Book } from '../../models/book.model';
+import { IBook } from '../../models/book.model';
 import BookItem from './BookItem';
 import { TViewMode } from './BooksViewSwitcher';
 
 interface IProps {
-  books: Book[];
+  books: IBook[];
 }
 
 function BooksList({ books }: IProps) {

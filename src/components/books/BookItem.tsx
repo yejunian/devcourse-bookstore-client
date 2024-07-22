@@ -1,40 +1,46 @@
 import { FaHeart } from 'react-icons/fa';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Book } from '../../models/book.model';
+import { IBook } from '../../models/book.model';
 import { formatNumber } from '../../utils/format';
 import { TViewMode } from './BooksViewSwitcher';
 
 interface IProps {
-  book: Book;
+  book: IBook;
   view: TViewMode;
 }
 
 function BookItem({ book, view }: IProps) {
   return (
     <BookItemStyle view={view}>
-      <div className="img">
-        <img src={book.thumbnail} alt={book.title} />
-      </div>
-
-      <div className="content">
-        <h2 className="title">{book.title}</h2>
-        <p className="summary">{book.excerpt}</p>
-        <p className="author">{book.author}</p>
-        <p className="price">{formatNumber(book.price)}원</p>
-        <div className="likes">
-          <FaHeart />
-          <span>{book.likes}</span>
+      <Link to={`/book/${book.id}`}>
+        <div className="img">
+          <img src={book.thumbnail} alt={book.title} />
         </div>
-      </div>
+
+        <div className="content">
+          <h2 className="title">{book.title}</h2>
+          <p className="summary">{book.excerpt}</p>
+          <p className="author">{book.author}</p>
+          <p className="price">{formatNumber(book.price)}원</p>
+          <div className="likes">
+            <FaHeart />
+            <span>{book.likes}</span>
+          </div>
+        </div>
+      </Link>
     </BookItemStyle>
   );
 }
 
 const BookItemStyle = styled.div<Pick<IProps, 'view'>>`
-  display: flex;
-  flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
-  box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+  a {
+    display: flex;
+    flex-direction: ${({ view }) => (view === 'grid' ? 'column' : 'row')};
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
 
   .img {
     border-radius: ${({ theme }) => theme.borderRadius.default};

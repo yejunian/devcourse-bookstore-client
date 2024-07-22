@@ -4,6 +4,7 @@ import Error from './components/common/Error';
 import ThemeSwitcher from './components/header/ThemeSwitcher';
 import Layout from './components/layout/Layout';
 import { BookstoreThemeProvider } from './context/ThemeContext';
+import BookDetail from './pages/BookDetail';
 import Books from './pages/Books';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -53,6 +54,14 @@ const router = createBrowserRouter([
     element: (
       <Layout>
         <Login />
+      </Layout>
+    ),
+  },
+  {
+    path: '/book/:bookId',
+    element: (
+      <Layout>
+        <BookDetail />
       </Layout>
     ),
   },

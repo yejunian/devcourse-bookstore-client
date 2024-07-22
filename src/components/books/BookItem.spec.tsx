@@ -2,10 +2,10 @@ import { render } from '@testing-library/react';
 import React from 'react';
 
 import { BookstoreThemeProvider } from '../../context/ThemeContext';
-import { Book } from '../../models/book.model';
+import { IBook } from '../../models/book.model';
 import BookItem from './BookItem';
 
-const dummyBook: Book = {
+const dummyBook: IBook = {
   id: 1,
   thumbnail: 'https://picsum.photos/id/1/128',
   title: 'Dummy Book',

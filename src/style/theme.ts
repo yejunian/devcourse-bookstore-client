@@ -9,7 +9,7 @@ export type TColorKey =
   | 'text';
 export type THeadingSize = 'large' | 'medium' | 'small';
 export type TButtonSize = 'large' | 'medium' | 'small';
-export type TButtonScheme = 'primary' | 'normal';
+export type TButtonScheme = 'primary' | 'normal' | 'like';
 export type TLayoutWidth = 'large' | 'medium' | 'small';
 
 interface ITheme {
@@ -85,6 +85,10 @@ export const light: ITheme = {
     normal: {
       color: 'black',
       backgroundColor: 'lightgray',
+    },
+    like: {
+      color: 'white',
+      backgroundColor: 'coral',
     },
   },
   borderRadius: {
