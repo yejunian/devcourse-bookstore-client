@@ -1,4 +1,3 @@
-// TODO: 서버에서 id, pubDate 내려 주기
 export interface IBook {
   id: number;
   thumbnail: string;
@@ -11,8 +10,9 @@ export interface IBook {
 }
 
 export interface IBookDetail extends IBook {
-  category: number;
-  form: number;
+  categoryId: number;
+  categoryName: string;
+  form: string;
   isbn: string;
   pages: number;
   userLiked: boolean;

@@ -18,9 +18,11 @@ const bookInfoList: {
 }[] = [
   {
     label: '카테고리',
-    key: 'category',
-    filter: (book: IBookDetail) => (
-      <Link to={`/books?category_id=${book.category}`}>{book.category}</Link>
+    key: 'categoryName',
+    filter: (book) => (
+      <Link to={`/books?category_id=${book.categoryId}`}>
+        {book.categoryName}
+      </Link>
     ),
   },
   {
@@ -38,12 +40,12 @@ const bookInfoList: {
   {
     label: '출간일',
     key: 'pubDate',
-    filter: (book: IBookDetail) => formatDate(book.pubDate),
+    filter: (book) => formatDate(book.pubDate),
   },
   {
     label: '가격',
     key: 'price',
-    filter: (book: IBookDetail) => `${formatNumber(book.price)}원`,
+    filter: (book) => `${formatNumber(book.price)}원`,
   },
 ];
 

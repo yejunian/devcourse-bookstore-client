@@ -60,13 +60,17 @@ export const useBook = (bookId: string | undefined) => {
     addCart({
       bookId: book.id,
       quantity: quantity,
-    }).then(() => {
-      setCartAdded(true);
+    })
+      .then(() => {
+        setCartAdded(true);
 
-      setTimeout(() => {
-        setCartAdded(false);
-      }, 3000);
-    });
+        setTimeout(() => {
+          setCartAdded(false);
+        }, 3000);
+      })
+      .catch(() => {
+        showAlert('이미 장바구니에 담은 도서입니다.');
+      });
   };
 
   return { book, toggleLike, addToCart, cartAdded };
