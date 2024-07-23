@@ -25,7 +25,7 @@ function BooksList({ books }: IProps) {
   }, [location.search]);
 
   return (
-    <BooksListStyle view={view}>
+    <BooksListStyle $view={view}>
       {books.map((item) => (
         <BookItem key={item.id} book={item} view={view} />
       ))}
@@ -34,13 +34,13 @@ function BooksList({ books }: IProps) {
 }
 
 interface IBooksListStyleProps {
-  view: TViewMode;
+  $view: TViewMode;
 }
 
 const BooksListStyle = styled.div<IBooksListStyleProps>`
   display: grid;
-  grid-template-columns: ${({ view }) =>
-    view === 'grid' ? 'repeat(4, 1fr)' : 'repeat(1, 1fr)'};
+  grid-template-columns: ${({ $view }) =>
+    $view === 'grid' ? 'repeat(4, 1fr)' : 'repeat(1, 1fr)'};
   gap: 24px;
 `;
 

@@ -9,16 +9,11 @@ interface iProps {
   linelimit: number;
 }
 
-interface EllipsisBoxStyleProps {
-  linelimit: number;
-  $expanded: boolean;
-}
-
 function EllipsisBox({ children, linelimit }: iProps) {
   const [expanded, setExpanded] = useState(false);
 
   return (
-    <EllipsisBoxStyle linelimit={linelimit} $expanded={expanded}>
+    <EllipsisBoxStyle $linelimit={linelimit} $expanded={expanded}>
       <p>{children}</p>
       <div className="toggle">
         <Button
@@ -33,13 +28,18 @@ function EllipsisBox({ children, linelimit }: iProps) {
   );
 }
 
+interface EllipsisBoxStyleProps {
+  $linelimit: number;
+  $expanded: boolean;
+}
+
 const EllipsisBoxStyle = styled.div<EllipsisBoxStyleProps>`
   p {
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
-    -webkit-line-clamp: ${({ linelimit, $expanded }) =>
-      $expanded ? 'none' : linelimit};
+    -webkit-line-clamp: ${({ $linelimit, $expanded }) =>
+      $expanded ? 'none' : $linelimit};
     -webkit-box-orient: vertical;
     margin: 0;
     padding: 20px 0 0;
