@@ -8,7 +8,7 @@ import { useAlert } from './useAlert';
 
 export const useBook = (bookId: string | undefined) => {
   const { isLoggedIn } = useAuthStore();
-  const showAlert = useAlert();
+  const { showAlert } = useAlert();
 
   const [book, setBook] = useState<IBookDetail | null>(null);
   const [cartAdded, setCartAdded] = useState(false);
