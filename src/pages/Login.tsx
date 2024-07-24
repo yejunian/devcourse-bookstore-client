@@ -1,13 +1,11 @@
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { login, signup } from '../api/auth.api';
-import Button from '../components/common/Button';
-import InputText from '../components/common/InputText';
-import Title from '../components/common/Title';
-import { useAlert } from '../hooks/useAlert';
-import { useAuthStore } from '../store/authStore';
-import { SignupStyle } from './Signup';
+import Button from '@/components/common/Button';
+import InputText from '@/components/common/InputText';
+import Title from '@/components/common/Title';
+import { useAuth } from '@/hooks/useAuth';
+import { SignupStyle } from '@/pages/Signup';
 
 export interface ILoginProps {
   email: string;
@@ -15,10 +13,7 @@ export interface ILoginProps {
 }
 
 function Login() {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
-
-  const { isLoggedIn, storeLogin } = useAuthStore();
+  const { userLogin } = useAuth();
 
   const {
     register,
@@ -26,17 +21,8 @@ function Login() {
     formState: { errors },
   } = useForm<ILoginProps>();
 
-  const onSubmit = async (data: ILoginProps) => {
-    try {
-      const response = await login(data);
-
-      storeLogin(response.token);
-
-      showAlert('로그인을 완료했습니다.');
-      navigate('/');
-    } catch (error) {
-      showAlert('로그인에 실패했습니다.');
-    }
+  const onSubmit = (data: ILoginProps) => {
+    userLogin(data);
   };
 
   return (

@@ -1,13 +1,11 @@
-import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
-import { resetPassword, resetRequest, signup } from '../api/auth.api';
-import Button from '../components/common/Button';
-import InputText from '../components/common/InputText';
-import Title from '../components/common/Title';
-import { useAlert } from '../hooks/useAlert';
-import { SignupStyle } from './Signup';
+import Button from '@/components/common/Button';
+import InputText from '@/components/common/InputText';
+import Title from '@/components/common/Title';
+import { useAuth } from '@/hooks/useAuth';
+import { SignupStyle } from '@/pages/Signup';
 
 export interface IResetPassword {
   email: string;
@@ -15,10 +13,7 @@ export interface IResetPassword {
 }
 
 function ResetPassword() {
-  const navigate = useNavigate();
-  const { showAlert } = useAlert();
-
-  const [resetRequested, setResetRequested] = useState(false);
+  const { userResetPassword, userResetRequest, resetRequested } = useAuth();
 
   const {
     register,
@@ -28,17 +23,10 @@ function ResetPassword() {
 
   const onSubmit = async (data: IResetPassword) => {
     if (resetRequested) {
-      await resetPassword(data);
-      showAlert('비밀번호를 초기화했습니다.');
-      navigate('/login');
+      userResetPassword(data);
     } else {
-      await resetRequest(data);
-      setResetRequested(true);
+      userResetRequest(data);
     }
-    // await signup(data);
-
-    // showAlert('회원가입을 완료했습니다.');
-    // navigate('/login');
   };
 
   return (

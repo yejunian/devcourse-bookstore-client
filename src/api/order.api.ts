@@ -1,5 +1,5 @@
-import { IOrder, IOrderDetailItem, IOrderSheet } from '../models/order.model';
-import { httpClient } from './http';
+import { requestHandler } from '@/api/http';
+import { IOrder, IOrderDetailItem, IOrderSheet } from '@/models/order.model';
 
 interface IFetchOrdersResponseData {
   orders: IOrder[];
@@ -11,18 +11,16 @@ interface IFetchOrderResponseData {
 
 // TODO: API 수정 필요 (서버 쪽 구현 변경)
 export const order = async (orderData: IOrderSheet) => {
-  const response = await httpClient.post('/orders', orderData);
-  return response.data;
+  return await requestHandler('post', '/orders', orderData);
 };
 
 export const fetchOrders = async () => {
-  const response = await httpClient.get<IFetchOrdersResponseData>('/orders');
-  return response.data.orders;
+  return (await requestHandler<IFetchOrdersResponseData>('get', '/orders'))
+    .orders;
 };
 
 export const fetchOrder = async (orderId: number) => {
-  const response = await httpClient.get<IFetchOrderResponseData>(
-    `/orders/${orderId}`
-  );
-  return response.data.items;
+  return (
+    await requestHandler<IFetchOrderResponseData>('get', `/orders/${orderId}`)
+  ).items;
 };
