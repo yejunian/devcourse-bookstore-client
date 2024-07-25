@@ -1,6 +1,6 @@
-import { IBook, IBookDetail } from '../models/book.model';
-import { IPagination } from '../models/pagination.model';
-import { httpClient } from './http';
+import { httpClient } from '@/api/http';
+import { IBook, IBookDetail } from '@/models/book.model';
+import { IPagination } from '@/models/pagination.model';
 
 interface IFetchBooksParams {
   category?: number;
@@ -9,7 +9,7 @@ interface IFetchBooksParams {
   limit: number;
 }
 
-interface IFetchBooksResponse {
+export interface IFetchBooksResponse {
   books: IBook[];
   pagination: IPagination;
 }

@@ -20,3 +20,13 @@ export interface IBookDetail extends IBook {
   content: string;
   images: string[];
 }
+
+export interface IBookReviewItem {
+  id: number;
+  username: string;
+  content: string;
+  createdAt: string;
+  score: number;
+}
+
+export type TBookReviewItemWrite = Pick<IBookReviewItem, 'content' | 'score'>;

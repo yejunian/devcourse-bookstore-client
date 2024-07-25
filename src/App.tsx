@@ -3,10 +3,12 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import { queryClient } from '@/api/queryClient';
 import Error from '@/components/common/Error';
+import ToastContainer from '@/components/common/toast/ToastContainer';
 import Layout from '@/components/layout/Layout';
 import { BookstoreThemeProvider } from '@/context/ThemeContext';
 import BookDetail from '@/pages/BookDetail';
 import Books from '@/pages/Books';
+import BooksInfinite from '@/pages/BooksInfinite';
 import Cart from '@/pages/Cart';
 import Home from '@/pages/Home';
 import Login from '@/pages/Login';
@@ -23,6 +25,10 @@ const routeList = [
   {
     path: '/books',
     element: <Books />,
+  },
+  {
+    path: '/books-infinite',
+    element: <BooksInfinite />,
   },
   {
     path: '/signup',
@@ -71,6 +77,7 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <BookstoreThemeProvider>
         <RouterProvider router={router} />
+        <ToastContainer />
       </BookstoreThemeProvider>
     </QueryClientProvider>
   );
