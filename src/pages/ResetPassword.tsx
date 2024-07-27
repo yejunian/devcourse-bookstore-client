@@ -39,6 +39,7 @@ function ResetPassword() {
             <InputText
               placeholder="이메일"
               inputType="email"
+              inputMode="email"
               {...register('email', { required: true })}
             />
             {errors.email && <p className="error-text">이메일을 입력하세요.</p>}
@@ -49,6 +50,7 @@ function ResetPassword() {
               <InputText
                 placeholder="비밀번호"
                 inputType="password"
+                inputMode="text"
                 {...register('password', { required: true })}
               />
               {errors.password && (

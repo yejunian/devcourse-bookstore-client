@@ -1,4 +1,4 @@
-import { httpClient } from '@/api/http';
+import { httpClient, requestHandler } from '@/api/http';
 import { IBook, IBookDetail } from '@/models/book.model';
 import { IPagination } from '@/models/pagination.model';
 
@@ -46,4 +46,8 @@ export const likeBook = async (bookId: number) => {
 export const unlikeBook = async (bookId: number) => {
   const response = await httpClient.delete(`/likes/${bookId}`);
   return response;
+};
+
+export const fetchBestBooks = async () => {
+  return await requestHandler<IBook[]>('get', '/books/best');
 };
